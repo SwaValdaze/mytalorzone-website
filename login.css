@@ -1,0 +1,90 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #F5F5DC; /* Beige background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background: #FFFFFF;
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #5A0A18; /* Wine Red */
+}
+
+.input-group {
+    position: relative;
+    margin: 25px 0;
+}
+
+.input-group input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    padding: 5px 0;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    font-size: 14px;
+    color: #888;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-bottom: 2px solid #5A0A18; /* Wine Red */
+}
+
+
+.btn-login {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #5A0A18; /* Wine Red */
+    color: #FFFFFF;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   
+}
+
+.btn-login:hover {
+    background: #8C2F3E; /* Lighter Wine Red */
+}
+
+.signup-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.signup-link a {
+    color: #5A0A18; /* Wine Red */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

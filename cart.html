@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cart-container">
+        <h2>🛒 My Cart</h2>
+        <div id="cart-items"></div>
+        <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+    <script>
+        // Fetch and Display Cart Items
+        async function fetchCartItems() {
+            try {
+                const response = await fetch('/get-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ userId: 'USER_ID_HERE' }) // Replace with dynamic user ID
+                });
+                
+                const data = await response.json();
+                const cartItemsContainer = document.getElementById('cart-items');
+                cartItemsContainer.innerHTML = '';
+
+                if (data.success && data.cart.productsInCart.length > 0) {
+                    data.cart.productsInCart.forEach(item => {
+                        cartItemsContainer.innerHTML += `
+                            <div class="cart-item">
+                                <p>Product ID: ${item.productId}</p>
+                                <p>Quantity: ${item.productQty}</p>
+                                <button onclick="deleteItem('${item.productId}')">Remove</button>
+                            </div>
+                        `;
+                    });
+                } else {
+                    cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching cart items:', error);
+            }
+        }
+
+        // Delete Item from Cart
+        async function deleteItem(productId) {
+            try {
+                const response = await fetch('/delete-items', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: 'USER_ID_HERE', // Replace with dynamic user ID
+                        productId
+                    })
+                });
+
+                const data = await response.json();
+                if (data.message === 'Item deleted successfully.') {
+                    alert('Item removed from cart!');
+                    fetchCartItems();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error deleting item:', error);
+            }
+        }
+
+        // Proceed to Checkout
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            window.location.href = '/checkout';
+        });
+
+        // Initial Fetch
+        fetchCartItems();
+    </script>
+
+    
+</body>
+</html>
